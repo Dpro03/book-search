@@ -1,10 +1,12 @@
 {
   "name": "googlebooks-app",
   "version": "1.0.0",
-  "description": "",
+  "description": "Refactoring Google search books app to use GraphQL and Apollo",
   "main": "server/server.js",
   "scripts": {
-    "start": "node server/server.js",
+    "start": "if-env NODE_ENV=production && npm run start:prod || npm run start:dev",
+    "start:dev": "concurrently \"cd server && npm run watch\" \"cd client && npm start\"",
+    "start:prod": "node server/server.js",
     "develop": "concurrently \"cd server && npm run watch\" \"cd client && npm start\"",
     "install": "cd server && npm i && cd ../client && npm i",
     "build": "cd client && npm run build"
@@ -12,7 +14,19 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Dpro03/book-search.git"
+  },
   "devDependencies": {
     "concurrently": "^5.1.0"
+  },
+  "dependencies": {
+    "@apollo/client": "^3.7.7",
+    "@apollo/react-hooks": "^4.0.0",
+    "apollo-server-express": "^2.15.0",
+    "graphql": "^15.8.0",
+    "if-env": "^1.0.4",
+    "jsonwebtoken": "^9.0.0"
   }
 }
